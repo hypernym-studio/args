@@ -1,0 +1,55 @@
+{
+  "name": "@hypernym/args",
+  "version": "0.1.0",
+  "author": "Hypernym Studio",
+  "description": "A fast and ultra lightweight CLI argument parser.",
+  "license": "MIT",
+  "repository": "hypernym-studio/args",
+  "homepage": "https://github.com/hypernym-studio/args",
+  "funding": "https://github.com/sponsors/ivodolenc",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/types/index.d.ts",
+      "import": "./dist/index.mjs"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "keywords": [
+    "cli",
+    "argv",
+    "args",
+    "node",
+    "flags",
+    "alias",
+    "commands",
+    "typescript",
+    "arguments",
+    "process",
+    "parser",
+    "esm"
+  ],
+  "scripts": {
+    "build": "rolli",
+    "lint": "ESLINT_USE_FLAT_CONFIG=true eslint -c .config/eslint.config.js .",
+    "lint:fix": "ESLINT_USE_FLAT_CONFIG=true eslint -c .config/eslint.config.js --fix .",
+    "format": "prettier --config .config/prettier.config.js --write .",
+    "prepublishOnly": "npm run build"
+  },
+  "devDependencies": {
+    "@hypernym/eslint-config": "^2.0.0",
+    "@hypernym/prettier-config": "^2.0.0",
+    "@hypernym/tsconfig": "^1.0.1",
+    "@types/node": "^20.6.3",
+    "eslint": "^8.49.0",
+    "prettier": "^3.0.3",
+    "rolli": "^0.7.0",
+    "tsx": "^3.13.0",
+    "typescript": "^5.1.6"
+  },
+  "engines": {
+    "node": ">=v18.0.0"
+  }
+}
