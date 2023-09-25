@@ -33,6 +33,7 @@
   ],
   "scripts": {
     "build": "rolli",
+    "test": "vitest -c .config/vitest.config.ts",
     "lint": "ESLINT_USE_FLAT_CONFIG=true eslint -c .config/eslint.config.js .",
     "lint:fix": "ESLINT_USE_FLAT_CONFIG=true eslint -c .config/eslint.config.js --fix .",
     "format": "prettier --config .config/prettier.config.js --write .",
@@ -42,12 +43,12 @@
     "@hypernym/eslint-config": "^2.0.0",
     "@hypernym/prettier-config": "^2.0.0",
     "@hypernym/tsconfig": "^1.0.1",
-    "@types/node": "^20.6.3",
+    "@types/node": "^20.6.5",
     "eslint": "^8.49.0",
     "prettier": "^3.0.3",
     "rolli": "^0.7.0",
-    "tsx": "^3.13.0",
-    "typescript": "^5.1.6"
+    "typescript": "^5.1.6",
+    "vitest": "^0.34.5"
   },
   "engines": {
     "node": ">=v18.0.0"
