@@ -29,9 +29,9 @@ export function createArgs<T = Defaults>({
     _: [],
   }
 
-  const setArg = (arg: string, index: number, start: number) => {
+  const setArg = (arg: string, index: number) => {
     let value: boolean | string = true
-    const argKey = arg.slice(start)
+    const argKey = isFlag(arg) ? arg.slice(2) : arg.slice(1)
     const argValue = argv[index + 1]
 
     if (argValue && !argValue.startsWith('-')) value = argValue
@@ -52,18 +52,18 @@ export function createArgs<T = Defaults>({
 
   for (const [index, arg] of argv.entries()) {
     // flags '--'
-    if (isFlag(arg)) setArg(arg, index, 2)
+    if (isFlag(arg)) setArg(arg, index)
     // aliases '-'
-    else if (isAlias(arg)) setArg(arg, index, 1)
+    else if (isAlias(arg)) setArg(arg, index)
     // unprefixed values
     else {
       const _arg = argv[index - 1]
 
       if (!_arg) {
-        if (!isAlias(arg) && !arg.includes('=')) {
+        if (!arg.startsWith('-') && !arg.includes('=')) {
           args._.push(arg)
         }
-      } else if (!isAlias(_arg) && !arg.includes('=')) {
+      } else if (!_arg.startsWith('-') && !arg.includes('=')) {
         args._.push(arg)
       } else if ((_arg === '-' || _arg === '--') && !arg.includes('=')) {
         args._.push(arg)
