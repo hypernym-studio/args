@@ -16,6 +16,22 @@ npm i -D @hypernym/args
 
 ## Parser
 
+### Commands
+
+Specifies _commands_ without a prefix.
+
+```sh
+$ command
+
+# => { _: ['command'] }
+```
+
+```sh
+$ command-a command-b command-c
+
+# => { _: ['command-a', 'command-b', 'command-c'] }
+```
+
 ### Flags
 
 Specifies _flags_ with the `--` prefix.
@@ -48,22 +64,6 @@ $ -alias value
 # => { _: [], alias: 'value', }
 ```
 
-### Commands
-
-Specifies _commands_ without a prefix.
-
-```sh
-$ command
-
-# => { _: ['command'] }
-```
-
-```sh
-$ command-a command-b command-c
-
-# => { _: ['command-a', 'command-b', 'command-c'] }
-```
-
 ### Ignores
 
 - Ignores args `--` and `-`
@@ -80,7 +80,7 @@ $ --flag=value -- arg=value - -alias=value
 ### Simple
 
 ```sh
-$ args
+$
 ```
 
 ```ts
@@ -92,7 +92,7 @@ const args = createArgs<Args>()
 
 console.log(args)
 
-/* Output: 
+/*
 
 */
 ```
@@ -100,7 +100,7 @@ console.log(args)
 ### Custom
 
 ```sh
-$ args
+$
 ```
 
 ```ts
@@ -117,7 +117,7 @@ const args = createArgs<Args>({
 
 console.log(args)
 
-/* Output: 
+/* 
 
 */
 ```
