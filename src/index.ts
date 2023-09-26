@@ -13,9 +13,9 @@ import type { Defaults, Args, Options } from './types/index.js'
  * import { createArgs } from '@hypernym/args'
  *
  * interface Args {
- *   flag?: boolean
- *   alias?: string
- *   arg?: string
+ *   a?: string
+ *   b?: boolean
+ *   c?: string
  * }
  *
  * const args = createArgs<Args>()
