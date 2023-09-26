@@ -3,29 +3,22 @@ import { createArgs } from '../src/index.js'
 
 test('args-aliases', () => {
   interface ArgsAliases {
-    'alias-a'?: string
-    'alias-b'?: string
-    'alias-c'?: boolean
-    'alias-d'?: boolean
+    a?: string
+    b?: string
+    c?: boolean
+    d?: boolean
   }
 
-  // $ -alias-a value-a -alias-b value-b -alias-c -alias-d
+  // $ -a value -b value -c -d
   const argsAliases = createArgs<ArgsAliases>({
-    argv: [
-      '-alias-a',
-      'value-a',
-      '-alias-b',
-      'value-b',
-      '-alias-c',
-      '-alias-d',
-    ],
+    argv: ['-a', 'value', '-b', 'value', '-c', '-d'],
   })
 
   expect(argsAliases).toStrictEqual({
     _: [],
-    'alias-a': 'value-a',
-    'alias-b': 'value-b',
-    'alias-c': true,
-    'alias-d': true,
+    a: 'value',
+    b: 'value',
+    c: true,
+    d: true,
   })
 })

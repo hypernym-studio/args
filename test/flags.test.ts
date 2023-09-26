@@ -3,29 +3,22 @@ import { createArgs } from '../src/index.js'
 
 test('args-flags', () => {
   interface ArgsFlags {
-    'flag-a'?: boolean
-    'flag-b'?: string
-    'flag-c'?: boolean
-    'flag-d'?: string
+    a?: boolean
+    b?: string
+    c?: boolean
+    d?: string
   }
 
-  // $ --flag-a --flag-b value-b --flag-c --flag-d value-d
+  // $ --a --b value --c --d value
   const argsFlags = createArgs<ArgsFlags>({
-    argv: [
-      '--flag-a',
-      '--flag-b',
-      'value-b',
-      '--flag-c',
-      '--flag-d',
-      'value-d',
-    ],
+    argv: ['--a', '--b', 'value', '--c', '--d', 'value'],
   })
 
   expect(argsFlags).toStrictEqual({
     _: [],
-    'flag-a': true,
-    'flag-b': 'value-b',
-    'flag-c': true,
-    'flag-d': 'value-d',
+    a: true,
+    b: 'value',
+    c: true,
+    d: 'value',
   })
 })
