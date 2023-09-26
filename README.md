@@ -16,25 +16,27 @@ npm i -D @hypernym/args
 
 ## Parser
 
-### Commands
+### Arguments
 
-Specifies _commands_ without a prefix.
+Unprefixed inputs are stored in an array.
 
 ```sh
-$ command
+$ arg
 
-# => { _: ['command'] }
+# => { _: ['arg'] }
 ```
 
 ```sh
-$ command-a command-b command-c
+$ arg-a arg-b arg-c
 
-# => { _: ['command-a', 'command-b', 'command-c'] }
+# => { _: ['arg-a', 'arg-b', 'arg-c'] }
 ```
 
 ### Flags
 
-Specifies _flags_ with the `--` prefix.
+Inputs with `--` prefix are parsed as _flags_.
+
+By default, standalone flags with no value are defined as `true`.
 
 ```sh
 $ --flag
@@ -50,7 +52,9 @@ $ --flag value
 
 ### Aliases
 
-Specifies _aliases_ with the `-` prefix.
+Inputs with `-` prefix are parsed as _aliases_.
+
+By default, standalone aliases with no value are defined as `true`.
 
 ```sh
 $ -alias
@@ -66,8 +70,8 @@ $ -alias value
 
 ### Ignores
 
-- Ignores args `--` and `-`
-- Ignores all args that include `=`
+- Ignores standalone inputs `--` and `-`
+- Ignores all inputs that include `=`
 
 ```sh
 $ --flag=value -- arg=value - -alias=value
@@ -77,49 +81,60 @@ $ --flag=value -- arg=value - -alias=value
 
 ## Usage
 
-### Simple
-
 ```sh
-$
+$ hello world --foo bar -baz -cli demo --fuz
 ```
 
 ```ts
 import { createArgs } from '@hypernym/args'
 
-interface Args {}
+interface Args {
+  foo?: string
+  baz?: boolean
+  cli?: string
+  fuz?: boolean
+}
 
 const args = createArgs<Args>()
 
 console.log(args)
 
-/*
-
+/* Output:
+{
+  _: ['hello', 'world'],
+  foo: 'bar',
+  baz: true,
+  cli: 'demo',
+  fuz: true
+}
 */
 ```
 
-### Custom
+## Options
 
-```sh
-$
-```
+### argv
+
+- Type: `string[]`
+- Default: `process.argv.slice(2)`
 
 ```ts
-import { createArgs } from '@hypernym/args'
+const args = createArgs({
+  argv: process.argv.slice(2),
+})
+```
 
-interface Args {}
+### alias
 
-const args = createArgs<Args>({
+- Type: `object`
+- Default: `undefined`
+
+```ts
+const args = createArgs({
   alias: {
-    alias: ['a', 'b'],
-    command: 'cmd',
+    config: ['conf', 'c'],
+    help: 'h',
   },
 })
-
-console.log(args)
-
-/* 
-
-*/
 ```
 
 ## Community
