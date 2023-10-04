@@ -1,6 +1,3 @@
-// Auto-generated
-export * from '../index.js'
-
 export type Defaults = Record<string, unknown>
 
 export type Args<T = Defaults> = T & {
@@ -11,3 +8,6 @@ export interface Options {
   argv?: string[]
   alias?: Record<string, string | string[]>
 }
+
+// Auto-generated
+export * from '../index.js'

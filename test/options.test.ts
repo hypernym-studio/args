@@ -11,16 +11,16 @@ test('args-options', () => {
     f?: boolean
   }
 
-  // $ --a value --d
-  const argsFlags = createArgs<Args>({
-    argv: ['--a', 'value', '--d'],
+  // $ --c value --e
+  const argsOptions = createArgs<Args>({
+    argv: ['--c', 'value', '--e'],
     alias: {
       a: ['b', 'c'],
       d: ['e', 'f'],
     },
   })
 
-  expect(argsFlags).toStrictEqual({
+  expect(argsOptions).toStrictEqual({
     _: [],
     a: 'value',
     b: 'value',
