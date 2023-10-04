@@ -10,13 +10,11 @@ test('args-mix', () => {
   }
 
   // $ hello world --foo bar -baz -cli demo --fuz
-  const args = createArgs<Args>({
+  const argsMix = createArgs<Args>({
     argv: ['hello', 'world', '--foo', 'bar', '-baz', '-cli', 'demo', '--fuz'],
   })
 
-  console.log(args)
-
-  expect(args).toStrictEqual({
+  expect(argsMix).toStrictEqual({
     _: ['hello', 'world'],
     foo: 'bar',
     baz: true,
