@@ -5,7 +5,7 @@ A fast and ultra lightweight CLI argument parser.
 <sub><a href="https://github.com/hypernym-studio/args">Repository</a> | <a href="https://www.npmjs.com/package/@hypernym/args">Package</a> | <a href="https://github.com/hypernym-studio/args/releases">Releases</a> | <a href="https://github.com/hypernym-studio/args/discussions">Discussions</a></sub>
 
 ```sh
-npm i -D @hypernym/args
+npm i @hypernym/args
 ```
 
 ## Features
