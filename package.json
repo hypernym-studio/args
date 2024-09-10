@@ -33,24 +33,28 @@
   ],
   "scripts": {
     "build": "hyperbundler",
-    "test": "vitest -c .config/vitest.config.ts",
-    "lint": "ESLINT_USE_FLAT_CONFIG=true eslint -c .config/eslint.config.js .",
-    "lint:fix": "ESLINT_USE_FLAT_CONFIG=true eslint -c .config/eslint.config.js --fix .",
-    "format": "prettier --config .config/prettier.config.js --write .",
+    "test": "vitest",
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix .",
+    "format": "prettier --write .",
+    "dev": "bun --watch playground/args.ts",
     "prepublishOnly": "npm run build"
   },
-  "devDependencies": {
-    "@hypernym/bundler": "^0.1.2",
-    "@hypernym/eslint-config": "^2.0.1",
-    "@hypernym/prettier-config": "^2.0.1",
-    "@hypernym/tsconfig": "^1.1.0",
-    "@types/node": "^20.8.4",
-    "eslint": "^8.51.0",
-    "prettier": "^3.0.3",
-    "typescript": "^5.2.2",
-    "vitest": "^0.34.6"
-  },
+  "sideEffects": false,
+  "packageManager": "pnpm@9.10.0",
   "engines": {
-    "node": ">=v18.0.0"
+    "node": ">=20.0.0",
+    "pnpm": ">=9.0.0"
+  },
+  "devDependencies": {
+    "@hypernym/bundler": "^0.10.0",
+    "@hypernym/eslint-config": "^3.5.0",
+    "@hypernym/prettier-config": "^3.2.0",
+    "@hypernym/tsconfig": "^2.3.0",
+    "@types/node": "^20.16.5",
+    "eslint": "^9.10.0",
+    "prettier": "^3.3.3",
+    "typescript": "^5.5.4",
+    "vitest": "^2.0.5"
   }
 }
