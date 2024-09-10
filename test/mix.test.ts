@@ -1,5 +1,5 @@
 import { test, expect } from 'vitest'
-import { createArgs } from '../src/index.js'
+import { createArgs } from '@'
 
 test('args-mix', () => {
   interface Args {
@@ -9,9 +9,8 @@ test('args-mix', () => {
     fuz?: boolean
   }
 
-  // $ hello world --foo bar -baz -cli demo --fuz
   const argsMix = createArgs<Args>({
-    argv: ['hello', 'world', '--foo', 'bar', '-baz', '-cli', 'demo', '--fuz'],
+    argv: ['hello', 'world', '--foo=bar', '-baz', '-cli=demo', '--fuz'],
   })
 
   expect(argsMix).toStrictEqual({

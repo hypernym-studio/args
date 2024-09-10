@@ -1,11 +1,11 @@
-// Inspired by mri, https://github.com/lukeed/mri 1.2.0 MIT
-// Rewritten in TypeScript by Ivo Dolenc, Hypernym Studio
+// Inspired by mri, 1.2.0, MIT License, https://github.com/lukeed/mri
+// Rewritten and adapted to @hypernym/args, 0.3.0, MIT License, https://github.com/hypernym-studio/args
 
-import { isString, isArray, isFlag, isAlias } from './utils.js'
-import type { Defaults, Args, Options } from './types/index.js'
+import { isString, isArray, isFlag, isAlias } from './utils'
+import type { Defaults, Args, Options } from './types'
 
 /**
- * Creates a command-line argument parser for the Node process.
+ * Creates a command-line argument parser.
  *
  * @example
  *
@@ -24,51 +24,68 @@ import type { Defaults, Args, Options } from './types/index.js'
 export function createArgs<T = Defaults>({
   argv = process.argv.slice(2),
   alias,
+  defaults,
+  exclude,
 }: Options = {}): Args<T> {
   const args: Args = {
     _: [],
   }
 
-  function _setArg(arg: string, index: number) {
+  const excludes = ['--', '-', ...(exclude || [])]
+  argv = argv.filter((arg) => !excludes.includes(arg))
+
+  function setArg(arg: string, index: number) {
     let value: boolean | string = true
-    const argKey = isFlag(arg) ? arg.slice(2) : arg.slice(1)
-    const argValue = argv[index + 1]
+    let argKey: string = isFlag(arg) ? arg.slice(2) : arg.slice(1)
+    let argValue: string
+
+    if (arg.includes('=')) {
+      const split = argKey.split('=')
+      argKey = split[0]
+      argValue = split[1]
+    } else {
+      argValue = argv[index + 1]
+    }
 
     if (argValue && !argValue.startsWith('-')) value = argValue
 
-    if (argKey && !argKey.includes('=')) {
-      if (alias) {
-        for (const [aliasKey, aliasValue] of Object.entries(alias)) {
-          if (aliasKey.includes(argKey) || aliasValue.includes(argKey)) {
-            args[aliasKey] = value
-            if (isString(aliasValue)) args[aliasValue] = value
-            if (isArray(aliasValue)) for (const v of aliasValue) args[v] = value
-          }
+    if (alias) {
+      for (const [aliasKey, aliasValue] of Object.entries(alias)) {
+        if (aliasKey.includes(argKey) || aliasValue.includes(argKey)) {
+          args[aliasKey] = value
+          if (isString(aliasValue)) args[aliasValue] = value
+          if (isArray(aliasValue)) for (const v of aliasValue) args[v] = value
+          return
         }
       }
+    }
 
-      args[argKey] = value
+    args[argKey] = value
+  }
+
+  for (let i = 0, l = argv.length; i < l; i++) {
+    const arg = argv[i]
+
+    // '--flags' and '-alias'
+    if (isFlag(arg) || isAlias(arg)) setArg(arg, i)
+    // 'arguments' (unprefixed)
+    else {
+      const prevArg: string | undefined = argv[i - 1]
+
+      if (!prevArg) {
+        if (!arg.includes('=')) args._.push(arg)
+      } else if (prevArg) {
+        if (!prevArg.startsWith('-') || prevArg.includes('=')) {
+          if (!arg.includes('=')) args._.push(arg)
+        }
+      }
     }
   }
 
-  for (const [index, arg] of argv.entries()) {
-    // flags '--'
-    if (isFlag(arg)) _setArg(arg, index)
-    // aliases '-'
-    else if (isAlias(arg)) _setArg(arg, index)
-    // unprefixed values
-    else {
-      const _arg = argv[index - 1]
-
-      if (!_arg) {
-        if (!arg.startsWith('-') && !arg.includes('=')) {
-          args._.push(arg)
-        }
-      } else if (!_arg.startsWith('-') && !arg.includes('=')) {
-        args._.push(arg)
-      } else if ((_arg === '-' || _arg === '--') && !arg.includes('=')) {
-        args._.push(arg)
-      }
+  if (defaults) {
+    if (defaults._) args._ = [...defaults._, ...args._]
+    for (const [dKey, dValue] of Object.entries(defaults)) {
+      if (dKey !== '_') args[dKey] = dValue
     }
   }
 

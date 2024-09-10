@@ -1,5 +1,5 @@
 import { test, expect } from 'vitest'
-import { createArgs } from '../src/index.js'
+import { createArgs } from '@'
 
 test('args-flags', () => {
   interface ArgsFlags {
@@ -9,9 +9,8 @@ test('args-flags', () => {
     d?: string
   }
 
-  // $ --a --b value --c --d value
   const argsFlags = createArgs<ArgsFlags>({
-    argv: ['--a', '--b', 'value', '--c', '--d', 'value'],
+    argv: ['--a', '--b=value', '--c', '--d', 'value'],
   })
 
   expect(argsFlags).toStrictEqual({
