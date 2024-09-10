@@ -5,7 +5,7 @@ A fast and ultra lightweight CLI argument parser.
 <sub><a href="https://github.com/hypernym-studio/args">Repository</a> | <a href="https://www.npmjs.com/package/@hypernym/args">Package</a> | <a href="https://github.com/hypernym-studio/args/releases">Releases</a> | <a href="https://github.com/hypernym-studio/args/discussions">Discussions</a></sub>
 
 ```sh
-npm i @hypernym/args
+pnpm add @hypernym/args
 ```
 
 ## Features
@@ -50,6 +50,12 @@ $ --flag value
 # => { _: [], flag: 'value', }
 ```
 
+```sh
+$ --flag=value
+
+# => { _: [], flag: 'value', }
+```
+
 ### Aliases
 
 Inputs with `-` prefix are parsed as _aliases_.
@@ -68,13 +74,19 @@ $ -alias value
 # => { _: [], alias: 'value', }
 ```
 
+```sh
+$ -alias=value
+
+# => { _: [], alias: 'value', }
+```
+
 ### Ignores
 
 - Ignores standalone inputs `--` and `-`
-- Ignores all inputs that include `=`
+- Ignores argument inputs that include `=`
 
 ```sh
-$ --flag=value -- arg=value - -alias=value
+$ arg=value -- arg-b=value -
 
 # => { _: [] }
 ```
@@ -99,7 +111,7 @@ const args = createArgs<Args>()
 
 console.log(args)
 
-/* Output:
+/*
 {
   _: ['hello', 'world'],
   foo: 'bar',
@@ -114,22 +126,30 @@ console.log(args)
 
 ### argv
 
-- Type: `string[]`
+Specifies an array of values to parse as arguments.
+
+- Type: `string[] | undefined`
 - Default: `process.argv.slice(2)`
 
 ```ts
-const args = createArgs({
+import { createArgs } from '@hypernym/args'
+
+createArgs({
   argv: process.argv.slice(2),
 })
 ```
 
 ### alias
 
-- Type: `object`
+Specifies an object of `alias` that will be added to the parsed output with matching values.
+
+- Type: `Record<string, string | string[]> | undefined`
 - Default: `undefined`
 
 ```ts
-const args = createArgs({
+import { createArgs } from '@hypernym/args'
+
+createArgs({
   alias: {
     config: ['conf', 'c'],
     help: 'h',
@@ -137,14 +157,47 @@ const args = createArgs({
 })
 ```
 
+### defaults
+
+Specifies an object of `defaults` that will be added to the parsed output regardless of `CLI` inputs.
+
+- Type: `(Record<string, unknown> & { _?: string[] }) | undefined`
+- Default: `undefined`
+
+```ts
+import { createArgs } from '@hypernym/args'
+
+createArgs({
+  defaults: {
+    _: ['value'],
+    a: true,
+  },
+})
+```
+
+### exclude
+
+Specifies an array of values that will be skipped when parsing arguments.
+
+- Type: `string[] | undefined`
+- Default: `undefined`
+
+```ts
+import { createArgs } from '@hypernym/args'
+
+createArgs({
+  exclude: ['arg', '--flag', '-alias'],
+})
+```
+
 ## Community
 
-Feel free to use the official [discussions](https://github.com/hypernym-studio/args/discussions) for any additional questions.
+Feel free to ask questions or share new ideas.
+
+Use the official [discussions](https://github.com/hypernym-studio/args/discussions) to get involved.
 
 ## License
 
-Developed in 🇭🇷 Croatia
+Developed in 🇭🇷 Croatia, © Hypernym Studio.
 
 Released under the [MIT](LICENSE.txt) license.
-
-© Hypernym Studio

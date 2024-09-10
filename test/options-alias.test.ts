@@ -1,7 +1,7 @@
 import { test, expect } from 'vitest'
-import { createArgs } from '../src/index.js'
+import { createArgs } from '@'
 
-test('args-options', () => {
+test('args-options-alias', () => {
   interface Args {
     a?: string
     b?: string
@@ -11,8 +11,7 @@ test('args-options', () => {
     f?: boolean
   }
 
-  // $ --c value --e
-  const argsOptions = createArgs<Args>({
+  const argsOptionsAlias = createArgs<Args>({
     argv: ['--c', 'value', '--e'],
     alias: {
       a: ['b', 'c'],
@@ -20,7 +19,7 @@ test('args-options', () => {
     },
   })
 
-  expect(argsOptions).toStrictEqual({
+  expect(argsOptionsAlias).toStrictEqual({
     _: [],
     a: 'value',
     b: 'value',
