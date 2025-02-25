@@ -1,5 +1,5 @@
-import { test, expect } from 'vitest'
 import { createArgs } from '@'
+import { test, expect } from 'vitest'
 
 test('args-flags', () => {
   interface ArgsFlags {
