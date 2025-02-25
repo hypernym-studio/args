@@ -1,12 +1,22 @@
-# @hypernym/args
+<h1 align="center">Args</h1>
 
-A fast and ultra lightweight CLI argument parser.
+<p align="center">A fast and ultra lightweight CLI argument parser.</p>
 
-<sub><a href="https://github.com/hypernym-studio/args">Repository</a> | <a href="https://www.npmjs.com/package/@hypernym/args">Package</a> | <a href="https://github.com/hypernym-studio/args/releases">Releases</a> | <a href="https://github.com/hypernym-studio/args/discussions">Discussions</a></sub>
+<p align="center">
+  <a href="https://github.com/hypernym-studio/args">Repository</a>
+  <span>✦</span>
+  <a href="https://www.npmjs.com/package/@hypernym/args">Package</a>
+  <span>✦</span>
+  <a href="https://github.com/hypernym-studio/args/releases">Releases</a>
+  <span>✦</span>
+  <a href="https://github.com/hypernym-studio/args/discussions">Discussions</a>
+</p>
 
-```sh
-pnpm add @hypernym/args
-```
+<br>
+
+<pre align="center">pnpm add @hypernym/args</pre>
+
+<br>
 
 ## Features
 
