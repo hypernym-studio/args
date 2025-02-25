@@ -1,6 +1,3 @@
-// Inspired by mri, 1.2.0, MIT License, https://github.com/lukeed/mri
-// Rewritten and adapted to @hypernym/args, 0.3.0, MIT License, https://github.com/hypernym-studio/args
-
 import { isString, isArray, isFlag, isAlias } from './utils'
 import type { Defaults, Args, Options } from './types'
 
@@ -34,7 +31,7 @@ export function createArgs<T = Defaults>({
   const excludes = ['--', '-', ...(exclude || [])]
   argv = argv.filter((arg) => !excludes.includes(arg))
 
-  function setArg(arg: string, index: number) {
+  const setArg = (arg: string, index: number) => {
     let value: boolean | string = true
     let argKey: string = isFlag(arg) ? arg.slice(2) : arg.slice(1)
     let argValue: string
