@@ -1,4 +1,4 @@
-<h1 align="center">Args</h1>
+<h1 align="center">@hypernym/args</h1>
 
 <p align="center">A fast and ultra lightweight CLI argument parser.</p>
 
