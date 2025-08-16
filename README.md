@@ -200,12 +200,6 @@ createArgs({
 })
 ```
 
-## Community
-
-Feel free to ask questions or share new ideas.
-
-Use the official [discussions](https://github.com/hypernym-studio/args/discussions) to get involved.
-
 ## License
 
 Developed in 🇭🇷 Croatia, © Hypernym Studio.
