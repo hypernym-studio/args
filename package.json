@@ -21,6 +21,8 @@
     "dist"
   ],
   "keywords": [
+    "hyper",
+    "hypernym",
     "cli",
     "argv",
     "args",
@@ -37,21 +39,19 @@
   "scripts": {
     "dev": "bun --watch playground/args.ts",
     "build": "hyperbundler",
-    "lint": "eslint .",
-    "lint:fix": "eslint --fix .",
-    "format": "prettier --write .",
+    "lint": "oxlint",
+    "format": "oxfmt",
     "test": "vitest -c test/vitest.config.ts",
     "prepublishOnly": "pnpm run build"
   },
   "devDependencies": {
-    "@hypernym/bundler": "^0.30.4",
-    "@hypernym/eslint-config": "^3.6.5",
-    "@hypernym/prettier-config": "^3.2.9",
-    "@hypernym/tsconfig": "^2.6.3",
-    "@types/node": "^24.8.1",
-    "eslint": "^9.37.0",
-    "prettier": "^3.6.2",
+    "@hypernym/bundler": "^0.32.0",
+    "@hypernym/oxlint-config": "^0.1.0",
+    "@hypernym/tsconfig": "^2.7.0",
+    "@types/node": "^25.3.3",
+    "oxfmt": "^0.36.0",
+    "oxlint": "^1.51.0",
     "typescript": "^5.9.3",
-    "vitest": "^3.2.4"
+    "vitest": "^4.0.18"
   }
 }
