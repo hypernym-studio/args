@@ -17,6 +17,8 @@ import type { Defaults, Args, Options } from './types'
  *
  * const args = createArgs<Args>()
  * ```
+ *
+ * @see [Repository](https://github.com/hypernym-studio/args)
  */
 export function createArgs<T = Defaults>({
   argv = process.argv.slice(2),
