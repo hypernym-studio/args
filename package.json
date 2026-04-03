@@ -1,6 +1,6 @@
 {
   "name": "@hypernym/args",
-  "version": "0.3.6",
+  "version": "0.3.7",
   "author": "Hypernym Studio",
   "description": "A fast and ultra lightweight CLI argument parser.",
   "license": "MIT",
